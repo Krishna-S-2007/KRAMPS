@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+pydantic
+sqlalchemy
+pandas
+numpy
+scikit-learn
+python-dotenv
+pytest
+kafka-python

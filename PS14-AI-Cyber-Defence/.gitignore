@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Virtual environments
+venv/
+.venv/
+
+# Environment variables
+.env
+
+# Generated telemetry data
+data/raw/*.jsonl

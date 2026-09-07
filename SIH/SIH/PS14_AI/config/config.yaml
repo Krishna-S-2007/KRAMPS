@@ -1,0 +1,177 @@
+# =============================================================================
+# PS14 AI Cyber Defence Platform — Central Configuration File
+# =============================================================================
+# Driven entirely by configuration. No hardcoded dataset values in Python.
+# =============================================================================
+
+pipeline:
+  name: "PS14 AI Cyber Defence Platform"
+  version: "2.0.0"
+
+# ---------------------------------------------------------------------------
+# Paths (relative to project root)
+# ---------------------------------------------------------------------------
+paths:
+  raw_data_dir: "data/raw"
+  processed_data_dir: "data/processed"
+  supervised_model_dir: "models/supervised"
+  anomaly_model_dir: "models/anomaly"
+  evaluation_dir: "evaluation/reports"
+
+# ---------------------------------------------------------------------------
+# Preprocessing — CIC-IDS2017 / Dataset-Agnostic
+# ---------------------------------------------------------------------------
+preprocessing:
+  # Timestamp column in dataset. Set to null if timestamp is absent/not needed.
+  # CIC-IDS2017 typically has a column named "Timestamp" or " Timestamp".
+  timestamp_col: null
+
+  # Target/label column in dataset. Must exist during training mode.
+  target_col: "Label"
+
+  # If True, replaces positive/negative infinity values with NaN before imputation.
+  handle_infinity: true
+
+  # Columns to drop before feature encoding.
+  # Set to empty or customize for your dataset schema.
+  drop_columns:
+    - "Flow ID"
+    - "Source IP"
+    - "Destination IP"
+
+  # Columns whose raw values are hexadecimal strings (e.g. "0x0002").
+  # Converted to integers in-place. Skip if not present in your dataset.
+  hex_columns: []
+
+  # Columns that are explicitly categorical (non-numeric, non-hex).
+  # These are fitted with an integer encoder during training.
+  # Unknown values at inference are mapped to a designated <UNK> code.
+  categorical_columns: []
+
+  # Strategy for filling numeric NaN values (including converted inf values).
+  # Options: "median", "mean", "zero"
+  numeric_impute_strategy: "median"
+
+  # Drop rows where more than this fraction of columns are NaN.
+  max_nan_fraction: 0.5
+
+# ---------------------------------------------------------------------------
+# Label Handling
+# ---------------------------------------------------------------------------
+label:
+  # List of values representing the BENIGN (negative) class -> 0.
+  # Values are stripped and lowercased during matching.
+  # EVERY other value not in this list maps to ATTACK (positive) -> 1.
+  benign_values:
+    - "benign"
+    - "normal"
+    - "0"
+    - 0
+  # If labels are already binary integers (0/1), set to true.
+  labels_already_binary: false
+
+# ---------------------------------------------------------------------------
+# Supervised Model — XGBoost
+# ---------------------------------------------------------------------------
+model:
+  xgboost:
+    n_estimators: 200
+    max_depth: 6
+    learning_rate: 0.05
+    subsample: 0.8
+    colsample_bytree: 0.8
+    random_state: 42
+    eval_metric: "logloss"
+
+  # SMOTE applied ONLY to the training split, never the validation split.
+  use_smote: false
+
+  # Fraction of data held out for validation (preprocessor never fits on this).
+  train_test_split: 0.2
+
+  # Decision boundary for binary classification.
+  decision_threshold: 0.5
+
+# ---------------------------------------------------------------------------
+# Anomaly Detection — Isolation Forest
+# ---------------------------------------------------------------------------
+anomaly:
+  contamination: 0.05
+  n_estimators: 100
+  random_state: 42
+  max_samples: "auto"
+
+  # Anomaly model is fit ONLY on the normal/benign baseline of the training split.
+  train_on_benign_only: true
+
+# ---------------------------------------------------------------------------
+# Score Fusion
+# ---------------------------------------------------------------------------
+fusion:
+  # Must sum to exactly 1.0 (raises error otherwise).
+  detection_weight: 0.6
+  anomaly_weight: 0.4
+
+# ---------------------------------------------------------------------------
+# SHAP Explainability
+# ---------------------------------------------------------------------------
+shap:
+  enabled: true
+  top_k: 3
+  background_samples: 100
+
+# ---------------------------------------------------------------------------
+# Alert Correlation
+# ---------------------------------------------------------------------------
+correlation:
+  # Candidate columns tried (in order) to identify source and target entities.
+  attacker_ip_candidates:
+    - "Source IP"
+    - "ip.src"
+  target_ip_candidates:
+    - "Destination IP"
+    - "ip.dst"
+  # Fragment columns used to reconstruct a timestamp string if decomposed.
+  timestamp_fragments:
+    - "frame.year"
+    - "frame.month"
+    - "frame.day"
+    - "frame.hour"
+    - "frame.minute"
+    - "frame.second"
+
+# ---------------------------------------------------------------------------
+# Heuristic Attack Progression & Risk
+# ---------------------------------------------------------------------------
+progression:
+  risk_weight_avg_alert: 0.4
+  risk_weight_max_alert: 0.4
+  risk_weight_event_count: 0.2
+  event_count_saturation: 10
+
+  eta_base_minutes: 45
+  eta_decay_per_event: 3.5
+  eta_risk_decay: 20
+  eta_minimum_minutes: 5
+
+  risk_tier_critical: 0.8
+  risk_tier_high: 0.5
+  risk_tier_medium: 0.3
+
+  mitre_tactics:
+    - "Reconnaissance"
+    - "Resource Development"
+    - "Initial Access"
+    - "Execution"
+    - "Persistence"
+    - "Privilege Escalation"
+    - "Defense Evasion"
+    - "Credential Access"
+    - "Discovery"
+    - "Lateral Movement"
+    - "Collection"
+    - "Command and Control"
+    - "Exfiltration"
+    - "Impact"
+
+  events_per_stage: 2

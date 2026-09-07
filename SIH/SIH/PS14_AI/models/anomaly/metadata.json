@@ -1,0 +1,9 @@
+{
+  "trained_at": "2026-08-16T14:11:58.870480+00:00",
+  "contamination": 0.05,
+  "n_estimators": 100,
+  "random_state": 42,
+  "score_min": -0.23779369491153768,
+  "score_max": 0.22672157875311644,
+  "n_train_samples": 1818477
+}

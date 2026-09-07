@@ -1,0 +1,74 @@
+'frame.number', 
+'frame.len', 
+'frame.time', 
+'frame.time_epoch',
+'frame.protocols', 
+'eth.src', 
+'eth.dst', 
+'eth.type', 
+'ip.src', -
+'ip.dst', -
+'ip.len', -
+'ip.ttl', -
+'ip.flags', -
+'ip.frag_offset', -
+'ip.proto', -
+'ip.version', -
+'ip.dsfield', -
+'ip.checksum', -
+'tcp.srcport', -
+'tcp.dstport', -
+'tcp.len', -
+'tcp.seq', -
+'tcp.ack', -
+'tcp.flags', - 
+'tcp.flags.syn', -
+'tcp.flags.ack', -
+'tcp.flags.fin', -
+'tcp.flags.reset', -
+'tcp.window_size', -
+'tcp.checksum', -
+'tcp.stream', -
+'udp.srcport', --
+'udp.dstport', --
+'udp.length', --
+'udp.checksum', --
+'icmp.type', --
+'icmp.code', --
+'icmp.checksum', --
+'http.request.method', --
+'http.request.uri', --
+'http.request.version', --
+'http.request.full_uri', --
+'http.response.code', --
+'http.user_agent', --
+'http.content_length_header', --
+'http.content_type', --
+'http.cookie', --
+'http.host', --
+'http.referer', --
+'http.location', --
+'http.authorization', --
+'http.connection', --
+'dns.qry.name', --
+'dns.qry.type', --
+'dns.qry.class', --
+'dns.flags.response', --
+'dns.flags.recdesired', --
+'dns.flags.rcode', --
+'dns.resp.ttl', --
+'dns.resp.len', --
+'smtp.req.command', --
+'smtp.data.fragment', --
+'pop.request.command', --
+'pop.response', --
+'imap.request.command', -- 
+'imap.response', --
+'ftp.request.command', --
+'ftp.request.arg', --
+'ftp.response.code', --
+'ftp.response.arg', --
+'ipv6.src', --
+'ipv6.dst', --
+'ipv6.plen', --
+'alert'

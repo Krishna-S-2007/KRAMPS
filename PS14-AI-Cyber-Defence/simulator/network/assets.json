@@ -1,0 +1,92 @@
+[
+  {
+    "asset_id": "C2-01",
+    "name": "Command and Control Server",
+    "ip": "10.10.1.10",
+    "role": "command_control",
+    "zone": "mission_core",
+    "criticality": 5,
+    "os": "linux",
+    "status": "healthy"
+  },
+  {
+    "asset_id": "OPS-01",
+    "name": "Operations Server",
+    "ip": "10.10.2.15",
+    "role": "operations_server",
+    "zone": "operations",
+    "criticality": 5,
+    "os": "linux",
+    "status": "healthy"
+  },
+  {
+    "asset_id": "COMM-01",
+    "name": "Communication Server",
+    "ip": "10.10.3.10",
+    "role": "communications",
+    "zone": "communications",
+    "criticality": 5,
+    "os": "linux",
+    "status": "healthy"
+  },
+  {
+    "asset_id": "FILE-01",
+    "name": "Secure File Server",
+    "ip": "10.10.4.20",
+    "role": "file_server",
+    "zone": "mission_core",
+    "criticality": 4,
+    "os": "windows",
+    "status": "healthy"
+  },
+  {
+    "asset_id": "DNS-01",
+    "name": "Internal DNS Server",
+    "ip": "10.10.5.53",
+    "role": "dns_server",
+    "zone": "services",
+    "criticality": 4,
+    "os": "linux",
+    "status": "healthy"
+  },
+  {
+    "asset_id": "HOST-07",
+    "name": "Operations Workstation 1",
+    "ip": "10.10.7.21",
+    "role": "workstation",
+    "zone": "operations",
+    "criticality": 3,
+    "os": "windows",
+    "status": "healthy"
+  },
+  {
+    "asset_id": "HOST-08",
+    "name": "Operations Workstation 2",
+    "ip": "10.10.7.22",
+    "role": "workstation",
+    "zone": "operations",
+    "criticality": 3,
+    "os": "windows",
+    "status": "healthy"
+  },
+  {
+    "asset_id": "WEB-01",
+    "name": "External Services Server",
+    "ip": "10.10.8.10",
+    "role": "web_server",
+    "zone": "dmz",
+    "criticality": 3,
+    "os": "linux",
+    "status": "healthy"
+  },
+  {
+    "asset_id": "PLC-01",
+    "name": "OT Control Simulator",
+    "ip": "10.10.9.20",
+    "role": "ot_controller",
+    "zone": "ot",
+    "criticality": 5,
+    "os": "embedded",
+    "status": "healthy"
+  }
+]

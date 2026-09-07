@@ -1,0 +1,10 @@
+Columns			Task 
+eth.src			Convert each element to binary
+eth.dst			Convert each element to binary
+ip.src			Convert each element to binary
+ip.dst			Convert each element to binary
+ip.flags		One hot encoding
+ip.checksum		Convert each element to binary
+tcp.flags		One hot encoding
+tcp.checksum		Convert each element to binary
+alert			Convert each element to 1 or 2

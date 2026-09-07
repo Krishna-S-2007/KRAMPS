@@ -1,0 +1,33 @@
+Normal:
+
+Logistic Regression
+Support Vector Machine
+Naive Bayes
+Stochastic Gradient Descent Classifier
+KNN (k-nearest neighbor)
+Radius Neighbors Classifier
+Decision Tree
+MLPClassifier
+RidgeClassifier
+PassiveAggressiveClassifier
+GaussianProcessClassifier
+NearestCentroid
+
+Ensamble:
+
+Random Forest
+ExtraTreesClassifier
+
+Boosting:
+
+LGBM Classifier
+XGBoost Classifier
+Gradient Boosting Classifier
+Histogram-Based Gradient Boosting
+AdaBoost
+CatBoost
+
+Bagging:
+
+BaggingClassifier
+

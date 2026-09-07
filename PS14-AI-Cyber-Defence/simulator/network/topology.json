@@ -1,0 +1,58 @@
+{
+  "connections": [
+    {
+      "source": "HOST-07",
+      "destination": "OPS-01",
+      "protocols": ["TCP"],
+      "ports": [443]
+    },
+    {
+      "source": "HOST-08",
+      "destination": "OPS-01",
+      "protocols": ["TCP"],
+      "ports": [443]
+    },
+    {
+      "source": "HOST-07",
+      "destination": "DNS-01",
+      "protocols": ["UDP"],
+      "ports": [53]
+    },
+    {
+      "source": "HOST-08",
+      "destination": "DNS-01",
+      "protocols": ["UDP"],
+      "ports": [53]
+    },
+    {
+      "source": "OPS-01",
+      "destination": "C2-01",
+      "protocols": ["TCP"],
+      "ports": [443]
+    },
+    {
+      "source": "OPS-01",
+      "destination": "FILE-01",
+      "protocols": ["TCP"],
+      "ports": [445]
+    },
+    {
+      "source": "COMM-01",
+      "destination": "C2-01",
+      "protocols": ["TCP"],
+      "ports": [443]
+    },
+    {
+      "source": "C2-01",
+      "destination": "PLC-01",
+      "protocols": ["TCP"],
+      "ports": [502]
+    },
+    {
+      "source": "WEB-01",
+      "destination": "OPS-01",
+      "protocols": ["TCP"],
+      "ports": [443]
+    }
+  ]
+}
