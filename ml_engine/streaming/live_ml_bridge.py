@@ -179,12 +179,12 @@ def run_live_bridge(ml_root: str, kafka_servers: str = "localhost:9092", window_
         )
 
 
-if __name__ == "__main__":
+def main():
+    default_ml_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     parser = argparse.ArgumentParser(
         prog="PS14 Live ML Bridge",
         description="Connects the PS14 simulator to the PS14_AI ML pipeline in real time with stateful windowing.",
     )
-    default_ml_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     parser.add_argument(
         "--ml-root",
         default=default_ml_root,
@@ -203,3 +203,8 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
     run_live_bridge(ml_root=args.ml_root, kafka_servers=args.kafka, window_seconds=args.window)
+
+
+if __name__ == "__main__":
+    main()
+
