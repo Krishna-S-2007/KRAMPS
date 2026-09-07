@@ -263,7 +263,10 @@ RESET = "\033[0m"
 
 
 def run(ml_root: str, n_events: int, forced_scenario=None):
-    from ml.telemetry_adapter import TelemetryAdapter
+    try:
+        from ml_engine.streaming.telemetry_adapter import TelemetryAdapter
+    except ImportError:
+        from ml.telemetry_adapter import TelemetryAdapter
 
     assets      = _build_assets()
     connections = _build_connections()
@@ -351,6 +354,7 @@ def run(ml_root: str, n_events: int, forced_scenario=None):
 
 if __name__ == "__main__":
     DEFAULT_ML_PATHS = [
+        os.path.abspath(os.path.join(THIS_DIR, "ml_engine")),
         os.path.abspath(os.path.join(THIS_DIR, "..", "SIH", "SIH", "PS14_AI")),
         os.path.abspath(os.path.join(THIS_DIR, "..", "PS14_AI")),
         os.path.abspath(os.path.join(THIS_DIR, "ml")),
@@ -361,7 +365,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--ml-root",
         default=default_ml_root,
-        help=f'Path to PS14_AI directory (default: {default_ml_root})',
+        help=f'Path to ml_engine directory (default: {default_ml_root})',
     )
     parser.add_argument(
         "--events",

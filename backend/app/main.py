@@ -19,8 +19,9 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(_
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-# Auto-locate PS14_AI
+# Auto-locate ml_engine
 DEFAULT_ML_PATHS = [
+    os.path.abspath(os.path.join(PROJECT_ROOT, "ml_engine")),
     os.path.abspath(os.path.join(PROJECT_ROOT, "..", "SIH", "SIH", "PS14_AI")),
     os.path.abspath(os.path.join(PROJECT_ROOT, "..", "PS14_AI")),
     os.path.abspath(os.path.join(PROJECT_ROOT, "ml")),
@@ -30,7 +31,11 @@ if ML_ROOT not in sys.path:
     sys.path.insert(0, ML_ROOT)
 
 from backend.app.telemetry.schemas import TelemetryEvent
-from ml.telemetry_adapter import TelemetryAdapter
+try:
+    from ml_engine.streaming.telemetry_adapter import TelemetryAdapter
+except ImportError:
+    from ml.telemetry_adapter import TelemetryAdapter
+
 from simulator.network.loader import load_assets, load_topology
 from simulator.scenarios.normal import apply_normal_profile
 from simulator.scenarios.ddos import apply_ddos_profile, TARGET_ASSET as DDOS_TARGET

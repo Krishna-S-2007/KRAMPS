@@ -21,7 +21,14 @@ import sys
 from pathlib import Path
 from typing import Any, Dict, Tuple
 
-from ml.telemetry_adapter import TelemetryAdapter
+try:
+    from ml_engine.streaming.telemetry_adapter import TelemetryAdapter
+except ImportError:
+    try:
+        from .telemetry_adapter import TelemetryAdapter
+    except ImportError:
+        from ml.telemetry_adapter import TelemetryAdapter
+
 
 logging.basicConfig(
     level=logging.INFO,
@@ -177,10 +184,11 @@ if __name__ == "__main__":
         prog="PS14 Live ML Bridge",
         description="Connects the PS14 simulator to the PS14_AI ML pipeline in real time with stateful windowing.",
     )
+    default_ml_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     parser.add_argument(
         "--ml-root",
-        required=True,
-        help="Absolute path to the PS14_AI project directory (where main.py lives).",
+        default=default_ml_root,
+        help=f"Path to the ml_engine directory (default: {default_ml_root})",
     )
     parser.add_argument(
         "--kafka",

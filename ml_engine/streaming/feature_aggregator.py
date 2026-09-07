@@ -20,7 +20,14 @@ from typing import Any, Dict, List, Optional, Tuple
 
 import numpy as np
 
-from ml.flow_state import FlowWindow, NormalizedEvent
+try:
+    from ml_engine.streaming.flow_state import FlowWindow, NormalizedEvent
+except ImportError:
+    try:
+        from .flow_state import FlowWindow, NormalizedEvent
+    except ImportError:
+        from ml.flow_state import FlowWindow, NormalizedEvent
+
 
 logger = logging.getLogger(__name__)
 
